@@ -1,0 +1,41 @@
+{
+  "sourceLanguage" : "fr-CA",
+  "strings" : {
+    "Country Info" : {
+
+    },
+    "Erreur" : {
+
+    },
+    "La configuration du service est invalide." : {
+      "comment" : "invalid url error message"
+    },
+    "Le serveur a retourné une erreur (%lld)." : {
+      "comment" : "http status error message"
+    },
+    "Les données reçues sont invalides." : {
+      "comment" : "decoding error message"
+    },
+    "Liste de pays" : {
+      "comment" : "la liste des pays",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Country List"
+          }
+        }
+      }
+    },
+    "OK" : {
+
+    },
+    "Réponse du serveur invalide." : {
+      "comment" : "invalid response error message"
+    },
+    "Une erreur est survenue." : {
+      "comment" : "generic error message"
+    }
+  },
+  "version" : "1.1"
+}
