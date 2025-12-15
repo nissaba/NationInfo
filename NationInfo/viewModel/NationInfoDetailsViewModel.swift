@@ -7,10 +7,12 @@
 
 import Foundation
 
+/// View model for country details; fetches details and reports errors through the coordinator.
 @Observable
 class NationInfoDetailsViewModel {
     var name: String
     var flagUrl: URL?
+    var flagAltText: String?
     var population: Int = 0
     var continent: String = ""
     var capital: String = ""
@@ -19,18 +21,28 @@ class NationInfoDetailsViewModel {
     @ObservationIgnored private let countryInfoHandler: FetchCountryDetailsHandling
     @ObservationIgnored private weak var coordinator: CountriesCoordinatorProtocole?
     
+    /// Creates a details view model.
+    /// - Parameters:
+    ///   - name: Country name to fetch details for.
+    ///   - flagUrl: Optional flag URL passed from the list.
+    ///   - flagAltText: Optional accessibility text for the flag.
+    ///   - countryInfoHandler: Use case for fetching details.
+    ///   - coordinator: Coordinator to report errors to.
     init(
         name: String,
         flagUrl: URL? = nil,
+        flagAltText: String? = nil,
         countryInfoHandler: FetchCountryDetailsHandling = FetchCountryDetailsHandler(),
         coordinator: CountriesCoordinatorProtocole? = nil
     ) {
         self.countryInfoHandler = countryInfoHandler
         self.name = name
         self.flagUrl = flagUrl
+        self.flagAltText = flagAltText
         self.coordinator = coordinator
     }
     
+    /// Loads details; on failure routes a friendly message to the coordinator.
     func loadDetails() async {
         isDataLoaded = false
         do {

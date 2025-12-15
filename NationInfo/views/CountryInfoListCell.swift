@@ -11,6 +11,7 @@ import SwiftUI
 struct CountryInfoListCell: View {
     let name: String
     let flagUrl: URL?
+    let flagAltText: String?
     let onTap: () -> Void
 
     var body: some View {
@@ -25,6 +26,7 @@ struct CountryInfoListCell: View {
                     }
                 }
                 .frame(width: 40, height: 24)
+                .accessibilityLabel(Text(flagAltText ?? String(localized: "Drapeau de \(name)", comment: "default flag accessibility label")))
 
                 Text(name)
                     .lineLimit(1)
@@ -45,5 +47,5 @@ struct CountryInfoListCell: View {
 
 #Preview{
     let url = URL(string: "https://flagcdn.com/w320/bt.png")
-    return CountryInfoListCell(name: "Test", flagUrl: url!, onTap: { print("Tapped preview cell") })
+    return CountryInfoListCell(name: "Test", flagUrl: url!, flagAltText: "Drapeau de test", onTap: { print("Tapped preview cell") })
 }

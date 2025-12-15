@@ -5,6 +5,7 @@ struct CountryInfoCard: View {
     let continent: String
     let population: Int
     let flagUrl: URL?
+    let flagAltText: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -13,17 +14,18 @@ struct CountryInfoCard: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .fill(.red.opacity(0.15))
-                    AsyncImage(url: flagUrl) { phase in
-                        switch phase {
-                        case .empty: ProgressView()
-                        case .success(let image): image.resizable().scaledToFit()
-                        case .failure: Image(systemName: "flag.slash")
+                AsyncImage(url: flagUrl) { phase in
+                    switch phase {
+                    case .empty: ProgressView()
+                    case .success(let image): image.resizable().scaledToFit()
+                    case .failure: Image(systemName: "flag.slash")
                         @unknown default: EmptyView()
                         }
                     }
                     .frame(width: 40, height: 24)
                 }
                 .frame(width: 56, height: 40)
+                .accessibilityLabel(Text(flagAltText ?? String(localized: "Drapeau de \(countryName)", comment: "default flag accessibility label")))
 
                 // Name
                 Text(countryName)
@@ -83,7 +85,8 @@ struct CountryInfoCard: View {
             countryName: "Country Name",
             continent: "Continent",
             population: 98_347,
-            flagUrl: url
+            flagUrl: url,
+            flagAltText: "Drapeau de test"
         )
     }
     .background(Color(.systemGroupedBackground))

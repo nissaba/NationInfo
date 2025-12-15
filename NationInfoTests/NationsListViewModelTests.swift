@@ -13,6 +13,7 @@ import Testing
 struct NationsListViewModelTests {
 
     @Test func loadCountries_success_usesMockHandler() async throws {
+        // On success, countries are loaded and coordinator is not asked to show errors.
         let mockCountries = [
             CountryInfoListModel(name: "France", flagURL: nil, flagAltText: nil)
         ]
@@ -27,6 +28,7 @@ struct NationsListViewModelTests {
     }
 
     @Test func loadCountries_failure_setsErrorMessage() async throws {
+        // On failure, coordinator.showError should be called.
         let handler = FetchCountriesHandlerMock(result: .failure(URLError(.notConnectedToInternet)))
         let coordinator = CoordinatorSpy()
         let vm = NationsListViewModel(countriesHandler: handler, coordinator: coordinator)
@@ -38,6 +40,7 @@ struct NationsListViewModelTests {
     }
 
     @Test func didSelect_invokesCoordinator() async throws {
+        // Selecting a country should notify the coordinator for navigation.
         let handler = FetchCountriesHandlerMock(result: .success([]))
         let coordinator = CoordinatorSpy()
         let vm = NationsListViewModel(countriesHandler: handler, coordinator: coordinator)

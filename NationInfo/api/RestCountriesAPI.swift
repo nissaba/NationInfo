@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Errors that can be thrown by `RestCountriesAPI`.
 enum RestCountriesAPIError: Error {
     case invalidURL
     case invalidResponse
@@ -15,11 +16,17 @@ enum RestCountriesAPIError: Error {
     case transport(Error)
 }
 
+/// Concrete implementation of `RestCountriesService` that talks to restcountries.com.
 struct RestCountriesAPI: RestCountriesService, Sendable {
     private let session: URLSessionProtocol
     private let decoder: JSONDecoder
     private let baseURL: URL?
 
+    /// Initializes a new service.
+    /// - Parameters:
+    ///   - session: Session used for network calls (mockable).
+    ///   - decoder: Decoder for JSON payloads.
+    ///   - baseURL: Base URL for the API (defaults to `https://restcountries.com`).
     init(
         session: URLSessionProtocol = URLSession.shared,
         decoder: JSONDecoder = JSONDecoder(),
@@ -30,6 +37,7 @@ struct RestCountriesAPI: RestCountriesService, Sendable {
         self.baseURL = baseURL
     }
 
+    /// Fetches the list of countries with name and flag info.
     func fetchAllCountries() async throws -> [CountryInfoListModel] {
         guard let url = Self.makeAllCountriesURL(baseURL: baseURL) else {
             throw RestCountriesAPIError.invalidURL
@@ -55,11 +63,22 @@ struct RestCountriesAPI: RestCountriesService, Sendable {
                 throw RestCountriesAPIError.decodingFailed(error)
             }
 
-            return responseItems.map { CountryInfoListModel(
-                name: $0.name.common,
-                flagURL: URL(string: $0.flags.png),
-                flagAltText: $0.flags.alt
-            )}
+            return responseItems.map { item in
+                let url: URL?
+                if let candidate = URL(string: item.flags.png),
+                   let scheme = candidate.scheme?.lowercased(),
+                   scheme == "http" || scheme == "https" {
+                    url = candidate
+                } else {
+                    url = nil
+                }
+
+                return CountryInfoListModel(
+                    name: item.name.common,
+                    flagURL: url,
+                    flagAltText: item.flags.alt
+                )
+            }
         } catch let apiError as RestCountriesAPIError {
             throw apiError
         } catch {
@@ -67,6 +86,8 @@ struct RestCountriesAPI: RestCountriesService, Sendable {
         }
     }
 
+    /// Fetches details for a given country name.
+    /// - Parameter name: Country name to search.
     func fetchCountryDetails(name: String) async throws -> CountryInfoModel {
         guard let url = Self.makeCountryDetailsURL(baseURL: baseURL, name: name) else {
             throw RestCountriesAPIError.invalidURL
@@ -97,8 +118,6 @@ struct RestCountriesAPI: RestCountriesService, Sendable {
             }
 
             return CountryInfoModel(
-                name: name,
-                flagURL: nil,
                 continents: first.continents,
                 population: first.population,
                 capital: first.capital ?? []

@@ -22,7 +22,8 @@ struct NationInfoView: View {
                         countryName: viewModel.name,
                         continent: viewModel.continent,
                         population: viewModel.population,
-                        flagUrl: viewModel.flagUrl
+                        flagUrl: viewModel.flagUrl,
+                        flagAltText: viewModel.flagAltText
                     )
                     Spacer()
                 }

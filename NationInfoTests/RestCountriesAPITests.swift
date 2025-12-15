@@ -13,6 +13,7 @@ import Testing
 struct RestCountriesAPITests {
 
     @Test func fetchAllCountries_success() async throws {
+        // Given a valid payload, the client should decode and map list items with flag URLs and alt text.
         let data = Data(FakeResponses.allCountriesSuccess.utf8)
         let response = HTTPURLResponse(
             url: URL(string: "https://example.com/v3.1/all")!,
@@ -33,6 +34,7 @@ struct RestCountriesAPITests {
     }
 
     @Test func fetchAllCountries_emptyArray() async throws {
+        // Given an empty payload, the client should return an empty list without throwing.
         let data = Data(FakeResponses.emptyArray.utf8)
         let response = HTTPURLResponse(
             url: URL(string: "https://example.com/v3.1/all")!,
@@ -49,6 +51,7 @@ struct RestCountriesAPITests {
     }
 
     @Test func fetchAllCountries_missingAlt() async throws {
+        // Missing optional alt text should decode to nil, not fail decoding.
         let data = Data(FakeResponses.missingAlt.utf8)
         let response = HTTPURLResponse(
             url: URL(string: "https://example.com/v3.1/all")!,
@@ -66,6 +69,7 @@ struct RestCountriesAPITests {
     }
 
     @Test func fetchAllCountries_invalidFlagURL() async throws {
+        // An invalid flag URL string should be treated as nil after validation.
         let data = Data(FakeResponses.invalidFlagURL.utf8)
         let response = HTTPURLResponse(
             url: URL(string: "https://example.com/v3.1/all")!,
@@ -83,6 +87,7 @@ struct RestCountriesAPITests {
     }
 
     @Test func fetchCountryDetails_success() async throws {
+        // Details endpoint should decode continents/population/capital correctly.
         let data = Data(FakeResponses.countryDetailsSuccess.utf8)
         let response = HTTPURLResponse(
             url: URL(string: "https://example.com/v3.1/name/france")!,
@@ -95,13 +100,13 @@ struct RestCountriesAPITests {
 
         let details = try await api.fetchCountryDetails(name: "france")
 
-        #expect(details.name == "france")
         #expect(details.continents == ["Europe"])
         #expect(details.population == 67000000)
         #expect(details.capital == ["Paris"])
     }
 
     @Test func fetchCountryDetails_httpError() async throws {
+        // Non-2xx HTTP status should surface as httpStatus error.
         let data = Data()
         let response = HTTPURLResponse(
             url: URL(string: "https://example.com/v3.1/name/france")!,
@@ -124,6 +129,7 @@ struct RestCountriesAPITests {
     }
 
     @Test func fetchCountryDetails_decodingError() async throws {
+        // Bad JSON should surface as decodingFailed error.
         let data = Data(FakeResponses.invalidJSON.utf8)
         let response = HTTPURLResponse(
             url: URL(string: "https://example.com/v3.1/name/france")!,
@@ -146,6 +152,7 @@ struct RestCountriesAPITests {
     }
 
     @Test func fetchCountryDetails_invalidURL() async throws {
+        // Nil base URL should cause invalidURL error before network is hit.
         let session = MockSession(result: .failure(URLError(.badURL)))
         let api = RestCountriesAPI(session: session, baseURL: nil)
 

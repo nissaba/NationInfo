@@ -12,7 +12,8 @@ import Testing
 @MainActor
 struct FetchCountriesHandlerTests {
 
-     @Test func execute_returnsCountries() async throws {
+    @Test func execute_returnsCountries() async throws {
+        // Handler should forward successful service result untouched.
         let expected = [
             CountryInfoListModel(name: "France", flagURL: nil, flagAltText: nil)
         ]
@@ -24,7 +25,8 @@ struct FetchCountriesHandlerTests {
         #expect(countries == expected)
     }
 
-     @Test func execute_propagatesError() async throws {
+    @Test func execute_propagatesError() async throws {
+        // Handler should propagate service errors.
         enum SampleError: Error { case fail }
         let service = MockRestCountriesService(result: .failure(SampleError.fail))
         let handler = FetchCountriesHandler(api: service)
@@ -40,10 +42,9 @@ struct FetchCountriesHandlerTests {
     }
 
     @Test func countryDetailsHandler_returnsDetails() async throws {
+        // Details handler should forward the service result unchanged.
         let expected = await MainActor.run { () -> CountryInfoModel in
             CountryInfoModel(
-                name: "france",
-                flagURL: URL(string: "https://flagcdn.com/fr.png"),
                 continents: ["Europe"],
                 population: 67000000,
                 capital: ["Paris"]
@@ -61,6 +62,7 @@ struct FetchCountriesHandlerTests {
     }
 
     @Test func countryDetailsHandler_propagatesError() async throws {
+        // Details handler should propagate errors thrown by the service.
         enum SampleError: Error { case fail }
         let service = MockRestCountriesService(
             allCountriesResult: .success([]),

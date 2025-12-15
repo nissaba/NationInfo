@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Concrete coordinator for the countries flow. Owns navigation path and builds views/view models.
 @Observable
 final class CountriesCoordinator: CountriesCoordinatorProtocole {
 
@@ -31,10 +32,14 @@ final class CountriesCoordinator: CountriesCoordinatorProtocole {
         }
     }
 
+    /// Current navigation path.
     var path = NavigationPath()
+    /// Controls presentation of a global error alert.
     var showErrorAlert = false
+    /// Message displayed in the global error alert.
     var errorMessage: String?
 
+    /// Root view for the flow (countries list).
     @ViewBuilder
     func rootView() -> some View {
         NationsListView(
@@ -44,21 +49,25 @@ final class CountriesCoordinator: CountriesCoordinatorProtocole {
         )
     }
 
+    /// Pushes a details route.
     func showDetails(for country: CountryInfoListModel) {
         path.append(Route.details(country))
     }
 
+    /// Pops the last route if available.
     func back() {
         if !path.isEmpty {
             path.removeLast()
         }
     }
 
+    /// Presents an error message via root-level alert.
     func showError(message: String) {
         errorMessage = message
         showErrorAlert = true
     }
 
+    /// Resolves a navigation route into a destination view.
     @ViewBuilder
     func destination(for route: Route) -> some View {
         switch route {
@@ -67,6 +76,7 @@ final class CountriesCoordinator: CountriesCoordinatorProtocole {
                 viewModel: NationInfoDetailsViewModel(
                     name: country.name,
                     flagUrl: country.flagURL,
+                    flagAltText: country.flagAltText,
                     coordinator: self
                 )
             )

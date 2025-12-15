@@ -21,7 +21,11 @@ struct NationsListView: View {
             VStack{
                 Text(vm.pageName)
                 List(vm.countries, id:\.id){ item in
-                    CountryInfoListCell(name: item.name, flagUrl: item.flagURL){
+                    CountryInfoListCell(
+                        name: item.name,
+                        flagUrl: item.flagURL,
+                        flagAltText: item.flagAltText
+                    ){
                         vm.didSelect(country: item)
                     }
                     .contentShape(Rectangle())

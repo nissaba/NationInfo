@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// View model for the list of nations, fetching data and delegating navigation/errors to the coordinator.
 @Observable
 class NationsListViewModel {
     
@@ -16,6 +17,10 @@ class NationsListViewModel {
     @ObservationIgnored private let fetchCountiresHandler: FetchCountriesHandling
     @ObservationIgnored private weak var coordinator: CountriesCoordinatorProtocole?
     
+    /// Creates a view model for the nations list.
+    /// - Parameters:
+    ///   - countriesHandler: Use case to fetch the countries list.
+    ///   - coordinator: Coordinator handling navigation and errors.
     init(
         countriesHandler: FetchCountriesHandling = FetchCountriesHandler(),
         coordinator: CountriesCoordinatorProtocole? = nil
@@ -25,6 +30,7 @@ class NationsListViewModel {
         pageName = String(localized: "Liste de pays", comment:"la liste des pays")
     }
     
+    /// Loads countries and sorts them by name; shows an error via coordinator on failure.
     func loadCountries() async {
         do {
             let unsorted = try await fetchCountiresHandler.execute()
@@ -36,6 +42,7 @@ class NationsListViewModel {
         }
     }
 
+    /// Notifies coordinator to show details for the selected country.
     func didSelect(country: CountryInfoListModel) {
         coordinator?.showDetails(for: country)
     }

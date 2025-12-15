@@ -2,19 +2,68 @@
   "sourceLanguage" : "fr-CA",
   "strings" : {
     "Country Info" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Country Info"
+          }
+        }
+      }
+    },
+    "Drapeau de %@" : {
+      "comment" : "default flag accessibility label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flag of %@"
+          }
+        }
+      }
     },
     "Erreur" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
     },
     "La configuration du service est invalide." : {
-      "comment" : "invalid url error message"
+      "comment" : "invalid url error message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The service configuration is invalid."
+          }
+        }
+      }
     },
     "Le serveur a retourné une erreur (%lld)." : {
-      "comment" : "http status error message"
+      "comment" : "http status error message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The server returned an error (%lld)."
+          }
+        }
+      }
     },
     "Les données reçues sont invalides." : {
-      "comment" : "decoding error message"
+      "comment" : "decoding error message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The received data is invalid."
+          }
+        }
+      }
     },
     "Liste de pays" : {
       "comment" : "la liste des pays",
@@ -28,13 +77,36 @@
       }
     },
     "OK" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "Réponse du serveur invalide." : {
-      "comment" : "invalid response error message"
+      "comment" : "invalid response error message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid server response."
+          }
+        }
+      }
     },
     "Une erreur est survenue." : {
-      "comment" : "generic error message"
+      "comment" : "generic error message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred."
+          }
+        }
+      }
     }
   },
   "version" : "1.1"
