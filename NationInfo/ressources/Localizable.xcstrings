@@ -1,109 +1,197 @@
 {
   "sourceLanguage" : "fr-CA",
   "strings" : {
-    "Country Info" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Country Info"
-          }
-        }
-      }
-    },
-    "Drapeau de %@" : {
-      "comment" : "default flag accessibility label",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Flag of %@"
-          }
-        }
-      }
-    },
-    "Erreur" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error"
-          }
-        }
-      }
-    },
-    "La configuration du service est invalide." : {
-      "comment" : "invalid url error message",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The service configuration is invalid."
-          }
-        }
-      }
-    },
-    "Le serveur a retourné une erreur (%lld)." : {
-      "comment" : "http status error message",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The server returned an error (%lld)."
-          }
-        }
-      }
-    },
-    "Les données reçues sont invalides." : {
-      "comment" : "decoding error message",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The received data is invalid."
-          }
-        }
-      }
-    },
-    "Liste de pays" : {
+    "countriesList" : {
       "comment" : "la liste des pays",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Country List"
           }
-        }
-      }
-    },
-    "OK" : {
-      "localizations" : {
-        "en" : {
+        },
+        "fr-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Liste de pays"
           }
         }
       }
     },
-    "Réponse du serveur invalide." : {
+    "country_info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Country Info"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Information du Pays"
+          }
+        }
+      }
+    },
+    "countrySearchPlaceholder" : {
+      "comment" : "Text de la barre de recherche",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find a Country"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher un pays"
+          }
+        }
+      }
+    },
+    "error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur"
+          }
+        }
+      }
+    },
+    "flag_of_format" : {
+      "comment" : "default flag accessibility label",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flag of %@"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drapeau de %@"
+          }
+        }
+      }
+    },
+    "genericError" : {
+      "comment" : "generic error message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une erreur est survenue."
+          }
+        }
+      }
+    },
+    "httpServerErrorMessage" : {
+      "comment" : "http status error message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The server returned an error (%lld)."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le serveur a retourné une erreur (%lld)."
+          }
+        }
+      }
+    },
+    "invalid_url_error_message" : {
+      "comment" : "invalid url error message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The service configuration is invalid."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le service est actuellement indisponible. Veuillez réessayer plus tard."
+          }
+        }
+      }
+    },
+    "invalidDataRecieved" : {
+      "comment" : "decoding error message",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The received data is invalid."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les données reçues sont invalides."
+          }
+        }
+      }
+    },
+    "invalidServerResponse" : {
       "comment" : "invalid response error message",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Invalid server response."
           }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réponse du serveur invalide."
+          }
         }
       }
     },
-    "Une erreur est survenue." : {
-      "comment" : "generic error message",
+    "OK" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "An error occurred."
+            "value" : "OK"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         }
       }

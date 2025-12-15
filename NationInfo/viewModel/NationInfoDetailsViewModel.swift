@@ -60,13 +60,13 @@ class NationInfoDetailsViewModel {
         if let apiError = error as? RestCountriesAPIError {
             switch apiError {
             case .invalidURL:
-                return String(localized: "La configuration du service est invalide.", comment: "invalid url error message")
+                return String(localized: .invalidUrlErrorMessage)
             case .invalidResponse:
-                return String(localized: "Réponse du serveur invalide.", comment: "invalid response error message")
+                return String(localized: .invalidServerResponse)
             case .httpStatus(let code):
-                return String(localized: "Le serveur a retourné une erreur (\(code)).", comment: "http status error message")
+                return String(localized: .httpServerErrorMessage(code))
             case .decodingFailed:
-                return String(localized: "Les données reçues sont invalides.", comment: "decoding error message")
+                return String(localized: .invalidDataRecieved)
             case .transport(let underlying):
                 if let urlError = underlying as? URLError {
                     return urlError.localizedDescription

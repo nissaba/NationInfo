@@ -16,23 +16,21 @@ struct NationsListView: View {
     }
     
     var body : some View{
-        ZStack{
-            Color.white.edgesIgnoringSafeArea(.all)
-            VStack{
-                Text(vm.pageName)
-                List(vm.countries, id:\.id){ item in
-                    CountryInfoListCell(
-                        name: item.name,
-                        flagUrl: item.flagURL,
-                        flagAltText: item.flagAltText
-                    ){
-                        vm.didSelect(country: item)
-                    }
-                    .contentShape(Rectangle())
+        VStack{
+            Text(vm.pageName)
+            List(vm.countries, id:\.id){ item in
+                CountryInfoListCell(
+                    name: item.name,
+                    flagUrl: item.flagURL,
+                    flagAltText: item.flagAltText
+                ){
+                    vm.didSelect(country: item)
                 }
-                .listStyle(.plain)
-                .padding(.bottom)
+                .contentShape(Rectangle())
             }
+            .listStyle(.plain)
+            .searchable(text: $vm.searchCriterion, prompt: vm.searchPlaceHolderText)
+            .padding(.bottom)
         }
         .task{
             await vm.loadCountries()

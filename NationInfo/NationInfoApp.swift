@@ -19,10 +19,10 @@ struct NationInfoApp: App {
                         coordinator.destination(for: route)
                     }
             }
-            .alert("Erreur", isPresented: $coordinator.showErrorAlert) {
-                Button("OK", role: .cancel) { }
+            .alert(.error, isPresented: $coordinator.showErrorAlert) {
+                Button(.ok, role: .cancel) { }
             } message: {
-                Text(coordinator.errorMessage ?? String(localized: "Une erreur est survenue.", comment: "generic error message"))
+                Text(coordinator.errorMessage ?? String(localized: .genericError))
             }
         }
     }

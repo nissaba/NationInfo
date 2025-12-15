@@ -25,7 +25,7 @@ struct CountryInfoCard: View {
                     .frame(width: 40, height: 24)
                 }
                 .frame(width: 56, height: 40)
-                .accessibilityLabel(Text(flagAltText ?? String(localized: "Drapeau de \(countryName)", comment: "default flag accessibility label")))
+                .accessibilityLabel(Text(flagAltText ?? String(localized: "flag_of_format", comment: "default flag accessibility label")))
 
                 // Name
                 Text(countryName)

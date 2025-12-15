@@ -34,7 +34,7 @@ struct NationInfoView: View {
         .task {
             await viewModel.loadDetails()
         }
-        .navigationTitle("Country Info")
+        .navigationTitle(String(localized: .countryInfo))
         .navigationBarTitleDisplayMode(.inline)
     }
 }
