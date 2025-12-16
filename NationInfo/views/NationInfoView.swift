@@ -31,8 +31,8 @@ struct NationInfoView: View {
                 ProgressView()
             }
         }
-        .task {
-            await viewModel.loadDetails()
+        .task {[weak viewModel] in
+            await viewModel?.loadDetails()
         }
         .navigationTitle(String(localized: .countryInfo))
         .navigationBarTitleDisplayMode(.inline)

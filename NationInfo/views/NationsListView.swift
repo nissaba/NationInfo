@@ -31,8 +31,8 @@ struct NationsListView: View {
             .padding(.bottom)
         }
         .navigationTitle(vm.pageName)
-        .task{
-            await vm.loadCountries()
+        .task{[weak vm] in
+            await vm?.loadCountries()
         }
     }
 }
