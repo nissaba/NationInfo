@@ -16,9 +16,7 @@ struct NationsListView: View {
     }
     
     var body : some View{
-        VStack{
-            Text(vm.pageName)
-            List(vm.countries, id:\.id){ item in
+        VStack{            List(vm.countries, id:\.id){ item in
                 CountryInfoListCell(
                     name: item.name,
                     flagUrl: item.flagURL,
@@ -32,6 +30,7 @@ struct NationsListView: View {
             .searchable(text: $vm.searchCriterion, prompt: vm.searchPlaceHolderText)
             .padding(.bottom)
         }
+        .navigationTitle(vm.pageName)
         .task{
             await vm.loadCountries()
         }
