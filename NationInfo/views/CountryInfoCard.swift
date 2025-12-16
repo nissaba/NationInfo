@@ -10,7 +10,6 @@ struct CountryInfoCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .center, spacing: 12) {
-                // Flag
                 ZStack {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .fill(.red.opacity(0.15))
@@ -26,8 +25,7 @@ struct CountryInfoCard: View {
                 }
                 .frame(width: 56, height: 40)
                 .accessibilityLabel(Text(flagAltText ?? String(localized: "flag_of_format", comment: "default flag accessibility label")))
-
-                // Name
+                
                 Text(countryName)
                     .font(.title2.bold())
                     .foregroundStyle(.primary)
@@ -45,7 +43,7 @@ struct CountryInfoCard: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(.background)
+                .fill(Color("cardBackgroundColor"))
                 .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 4)
         )
         .padding()
