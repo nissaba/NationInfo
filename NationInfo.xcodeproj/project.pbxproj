@@ -27,6 +27,7 @@
 		8C42674C2EEDEF47007800E2 /* NationInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NationInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4267592EEDEF4A007800E2 /* NationInfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NationInfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4267632EEDEF4A007800E2 /* NationInfoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NationInfoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C4269F22EF195B9007800E2 /* NationInfo.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = NationInfo.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		8C4267432EEDEF47007800E2 = {
 			isa = PBXGroup;
 			children = (
+				8C4269F22EF195B9007800E2 /* NationInfo.xctestplan */,
 				8C42674E2EEDEF47007800E2 /* NationInfo */,
 				8C42675C2EEDEF4A007800E2 /* NationInfoTests */,
 				8C4267662EEDEF4A007800E2 /* NationInfoUITests */,
