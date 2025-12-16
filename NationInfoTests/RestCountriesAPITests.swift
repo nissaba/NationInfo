@@ -51,7 +51,7 @@ struct RestCountriesAPITests {
     }
 
     @Test func fetchAllCountries_missingAlt() async throws {
-        // Missing optional alt text should decode to nil, not fail decoding.
+        // When alt text is missing in the payload, the mapper synthesizes one from the country name.
         let data = Data(FakeResponses.missingAlt.utf8)
         let response = HTTPURLResponse(
             url: URL(string: "https://example.com/v3.1/all")!,
@@ -65,7 +65,8 @@ struct RestCountriesAPITests {
         let countries = try await api.fetchAllCountries()
 
         let first = try #require(countries.first)
-        #expect(first.flagAltText == nil)
+        #expect(!first.flagAltText.isEmpty)
+        #expect(first.flagAltText.contains("Germany"))
     }
 
     @Test func fetchAllCountries_invalidFlagURL() async throws {
@@ -293,3 +294,4 @@ private func loadFixture(named name: String) throws -> Data {
         .appendingPathComponent(name)
     return try Data(contentsOf: sharedFixture)
 }
+
