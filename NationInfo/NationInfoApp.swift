@@ -19,6 +19,13 @@ struct NationInfoApp: App {
                         coordinator.destination(for: route)
                     }
             }
+            .onChange(of: coordinator.path.count) { oldCount, newCount in
+                if newCount < oldCount {
+                    coordinator.notifyBackNavigation()
+                } else if newCount > oldCount {
+                    coordinator.notifyNavigationCompleted()
+                }
+            }
             .alert(.error, isPresented: $coordinator.showErrorAlert) {
                 Button(.ok, role: .cancel) { }
             } message: {
@@ -27,3 +34,4 @@ struct NationInfoApp: App {
         }
     }
 }
+

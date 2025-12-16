@@ -10,7 +10,10 @@ import SwiftUI
 /// Concrete coordinator for the countries flow. Owns navigation path and builds views/view models.
 @Observable
 final class CountriesCoordinator: CountriesCoordinatorProtocole {
-
+    
+    @ObservationIgnored private var isNavigating = false
+    @ObservationIgnored private var currentRouteKey: String?
+    
     enum Route: Hashable {
         case details(CountryInfoListModel)
         
@@ -32,14 +35,11 @@ final class CountriesCoordinator: CountriesCoordinatorProtocole {
         }
     }
 
-    /// Current navigation path.
     var path = NavigationPath()
-    /// Controls presentation of a global error alert.
     var showErrorAlert = false
-    /// Message displayed in the global error alert.
     var errorMessage: String?
 
-    /// Root view for the flow (countries list).
+    /// Builds the root view (countries list) and injects this coordinator into its view model.
     @ViewBuilder
     func rootView() -> some View {
         NationsListView(
@@ -49,25 +49,54 @@ final class CountriesCoordinator: CountriesCoordinatorProtocole {
         )
     }
 
-    /// Pushes a details route.
+    /// Pushes the details screen for the given country.
+    /// Applies guards to avoid duplicate or concurrent navigations by comparing a stable route key.
     func showDetails(for country: CountryInfoListModel) {
-        path.append(Route.details(country))
+        //Prevent call from showing same navigation more than once
+        let routeKey = "details:\(country.name)"
+        guard isNavigating == false, currentRouteKey != routeKey else {
+            return
+        }
+        
+        isNavigating = true
+        currentRouteKey = routeKey
+        
+        path.append(Route.details(country))            
+        
+    }
+    
+    /// Marks the end of a navigation transition, re-enabling subsequent navigations.
+    func notifyNavigationCompleted() {
+        isNavigating = false
+    }
+    
+    /// Should be called when a back navigation occurs from a destination.
+    /// Updates the current route key (cleared at root) and resets the navigation guard.
+    func notifyBackNavigation() {
+        currentRouteKey = path.isEmpty ? nil : currentRouteKey
+        isNavigating = false
     }
 
-    /// Pops the last route if available.
+    /// Pops the last route from the navigation stack if present.
+    /// Clears the current route key when returning to root and resets the navigation guard.
     func back() {
         if !path.isEmpty {
             path.removeLast()
         }
+        if path.isEmpty {
+            currentRouteKey = nil
+        }
+        isNavigating = false
     }
 
-    /// Presents an error message via root-level alert.
+    /// Presents a global error message via an alert at the root of the flow.
     func showError(message: String) {
         errorMessage = message
         showErrorAlert = true
     }
 
-    /// Resolves a navigation route into a destination view.
+    /// Resolves a `Route` into a destination view for use with `NavigationStack`.
+    /// Instantiates the appropriate view model and injects this coordinator.
     @ViewBuilder
     func destination(for route: Route) -> some View {
         switch route {
@@ -83,3 +112,4 @@ final class CountriesCoordinator: CountriesCoordinatorProtocole {
         }
     }
 }
+
