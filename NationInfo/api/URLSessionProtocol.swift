@@ -12,4 +12,3 @@ protocol URLSessionProtocol: Sendable {
 }
 
 extension URLSession: URLSessionProtocol {}
-extension JSONDecoder: @unchecked Sendable {}
